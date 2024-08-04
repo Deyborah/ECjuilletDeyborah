@@ -1,50 +1,69 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect, Component} from 'react';
 import Resultats from './Resultats';
 import Question from './Questions';
+class Quizz extends Component {
 
-const Quizz = ({ level }) => {
-    const [questions, setQuestions] = useState([]);
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-    const [score, setScore] = useState(0);
-    const [showScore, setShowScore] = useState(false);
-
-    useEffect(() => {
-        fetch('/questions.json')
-            .then((response) => response.json())
-            .then((data) => {
-                const filteredQuestions = data.filter((q) => q.level === level);
-                setQuestions(filteredQuestions);
+    constructor(props) {
+        super(props);
+        this.state = {
+            questions: [],
+            currentQuestion: 0,
+            score: 0,
+            showResult: false,
+        };
+    }
+    componentDidMount() {
+        fetch('/Questions.json')
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ questions: data });
             })
-            .catch((error) => console.error('Error fetching questions:', error));
-    }, [level]);
+            .catch(error => console.error('Error fetching the questions:', error));
+    }
 
-    const handleAnswerOptionClick = (isCorrect) => {
+    // Méthode pour gérer la soumission de la réponse
+    handleSubmit = (isCorrect) => {
         if (isCorrect) {
-            setScore(score + 1);
+            this.setState((prevState) => ({
+                score: prevState.score + 1,
+            }));
         }
 
-        const nextQuestion = currentQuestionIndex + 1;
-        if (nextQuestion < questions.length) {
-            setCurrentQuestionIndex(nextQuestion);
+        if (this.state.currentQuestion === this.state.questions.length - 1) {
+            this.setState({ showResult: true });
         } else {
-            setShowScore(true);
+            this.setState((prevState) => ({
+                currentQuestion: prevState.currentQuestion + 1,
+            }));
         }
+
     };
 
-    return (
-        <div className="quizz">
-            {showScore ? (
-                <Resultats score={score} totalQuestions={questions.length} />
-            ) : (
-                questions.length > 0 && (
-                    <Question
-                        question={questions[currentQuestionIndex]}
-                        handleSubmit={handleAnswerOptionClick}
-                    />
-                )
-            )}
-        </div>
-    );
-};
+    render() {
+        const { questions, currentQuestion } = this.state;
+
+        if (questions.length === 0) {
+            return <div>Chargement...</div>;
+        }
+
+        const question = questions[currentQuestion];
+
+        return (
+            <div>
+                <h2>{question.text}</h2>
+                <ul>
+                    {question.options.map((option, index) => (
+                        <li key={index}>
+                            <button onClick={() => this.handleOptionClick(option.isCorrect)}>
+                                {option.text}
+                            </button>
+                        </li>
+                    ))}
+                </ul>
+                {/* Autres éléments du quiz */}
+            </div>
+        );
+    }
+}
 
 export default Quizz;

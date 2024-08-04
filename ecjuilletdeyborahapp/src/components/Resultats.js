@@ -1,12 +1,15 @@
 import React from 'react';
 
-const Resultats = ({ score, totalQuestions }) => {
+const Resultats  = ({ score, totalQuestions, rejouerQuizz }) => {
     return (
         <div>
-            <h2>Résultat de votre quizz</h2>
+            <h2>Résultat du Quizz</h2>
             <p>
-                Votre score est : {score}/{totalQuestions}.
+                Votre score est de {score}/{totalQuestions}.
             </p>
+            <button className="btn btn-primary" onClick={rejouerQuizz}>
+                Rejouer
+            </button>
         </div>
     );
 };

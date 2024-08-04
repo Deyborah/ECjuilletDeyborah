@@ -5,14 +5,15 @@ import Quizz from "./components/Quizz"
 import questions from "./components/Questions";
 import Resultats from "./components/Resultats";
 
-function App({ level }) {
-  return (
-      <div className="App">
-        <main>
-          <Quizz level={level}/>
-        </main>
-    </div>
-  );
+function App() {
+    return (
+        <div className="App">
+            <main>
+                <Quizz />
+            </main>
+
+        </div>
+    );
 }
 
 export default App;

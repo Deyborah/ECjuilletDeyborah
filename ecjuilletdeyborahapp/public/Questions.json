@@ -2,8 +2,8 @@
   {
     "id": 1,
     "level": 1,
-    "question": "Quel est le nom du personnage principale dans Naruto ?",
-    "answers": [
+    "text": "Quel est le nom du personnage principale dans Naruto ?",
+    "options": [
       { "text": "Gaara", "isCorrect": false },
       { "text": "Naruto", "isCorrect": true },
       { "text": "Jiraya", "isCorrect": false },
@@ -13,8 +13,8 @@
   {
     "id": 2,
     "level": 2,
-    "question": "Quel instrument n'a pas 4 cordes ?",
-    "answers": [
+    "text": "Quel instrument n'a pas 4 cordes ?",
+    "options": [
       { "text": "Guitare acoustique", "isCorrect": true },
       { "text": "Guitare Basse", "isCorrect": false },
       { "text": "Violon", "isCorrect": false },
@@ -24,8 +24,8 @@
   {
     "id": "3",
     "level": 3,
-    "question": "Dans Eragon en ancien langage comment dit on feu ?",
-    "answers": [
+    "text": "Dans Eragon en ancien langage comment dit on feu ?",
+    "options": [
       { "text": "Dras", "isCorrect": false },
       { "text": "Seithr", "isCorrect": false },
       { "text": "Brisingr", "isCorrect": true },
